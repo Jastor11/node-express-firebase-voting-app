@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Voting App</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.0/css/materialize.min.css">
+        <link rel="stylesheet" href="css/style.css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          // var config = {
+          //   apiKey: "",
+          //   authDomain: "",
+          //   databaseURL: "",
+          //   projectId: "",
+          //   storageBucket: "",
+          //   messagingSenderId: ""
+          // }
+          firebase.initializeApp(config)
+        </script>            
+    </head>
+    <body>
+        <div class="container">
+            <h1>Voting App</h1>
+            <p>Add Restaurant: <input id ="addRestaurant" /></p>
+            <button class = 'btn btn-primary' onclick={addRestaurant()}>
+                Submit
+            </button>
+            
+            <div class="row">
+                <% var keys = Object.keys(restaurants) %>
+
+                <% keys.forEach(function(key) { %>
+                    <% var allUsers %> 
+                   
+                    <% if (restaurants[key].votes) { %>
+                        <% allUsers = Object.keys(restaurants[key].votes) %>
+                    <% } else { %>
+                    <%  allUsers = [] %>
+                    <% } %>                    
+                    
+                    <div class="col s6 m6 l6">
+                      <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                          <span class="card-title"><%= restaurants[key].name %></span>
+                          <p>Votes: <%= allUsers.length %></p>
+                        </div>
+                        <div class="card-action">
+                          <button onclick={upvote("<%= key %>")} class="btn" >Upvote<i class="material-icons">add</i></button>
+                          <button onclick={downvote("<%= key %>")} class="btn" >Downvote<i class="material-icons">arrow_downward</i></button>
+                        </div>
+                      </div>
+                    </div>                
+                <% }) %>
+            </div>
+            
+            <h3 id="google-displayName"></h3>
+            <img id="google-pic" src="" />
+            <p id="google-email"></p>
+            <button 
+                class="btn btn-primary"
+                id="google-signin" 
+                onclick={signInWithGoogle()}
+            >
+                Sign In With Google
+            </button>
+            <button 
+                class="btn btn-"
+                id="signout" 
+                onclick={signOut()}
+                style="display: none; visibility: hidden;"
+            >
+                Sign Out
+            </button>
+        </div>
+        <script src="js/firebaseAuth.js"></script>
+        <script src = "js/firebaseVoting.js"></script>
+    </body>
+</html>
