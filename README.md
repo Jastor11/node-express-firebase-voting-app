@@ -8,7 +8,7 @@ This is by no means a production-ready app and in many ways is not even very wel
 
 The app uses ejs to render html templates serverside, and the client uses vanilla javascript to make api calls to Firebase for authentication and voting. 
 
-Made a few mistakes in how I set up the auth listener in the instructional videos, but this repository should reflect the right to avoid redundant code.
+Made a few mistakes in how I set up the auth listener in the instructional videos, but this repository should reflect the right changes to avoid redundant code.
 
 DISCLAIMER:
 
